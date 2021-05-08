@@ -1,4 +1,4 @@
-name: sync- leifengwl -JDRouterPush
+name: sync-leifengwl-scripts
 on:
   schedule:
     - cron: '1 0,15 * * *'
@@ -6,24 +6,25 @@ on:
   watch:
     types: started
   push:
-    branches: [ main ]
+    branches: [ master ]
   repository_dispatch:
-    types: sync- leifengwl -JDRouterPush
+    types: sync-leifengwl-scripts
 jobs:
   repo-sync:
     env:
       PAT: ${{ secrets.PAT }} #af97f0f12745a08dc156f7bcbe081dad6aca2020
+    runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
       - uses: actions/checkout@v2
         with:
           persist-credentials: false
 
-      - name: sync  leifengwl -JDRouterPush
+      - name: sync leifengwl-scripts
         uses: repo-sync/github-sync@v2
         if: env.PAT
         with:
           source_repo: "https://github.com/leifengwl/JDRouterPush.git"
-          source_branch: "main"
+          source_branch: "JDRouterPush"
           destination_branch: "main"
           github_token: ${{ secrets.PAT }}
