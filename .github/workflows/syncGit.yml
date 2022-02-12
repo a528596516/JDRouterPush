@@ -12,7 +12,7 @@ on:
 jobs:
   repo-sync:
     env:
-      PAT: ${{ secrets.PAT }} #af97f0f12745a08dc156f7bcbe081dad6aca2020
+      PAT: ${{ secrets.PAT }} 
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
